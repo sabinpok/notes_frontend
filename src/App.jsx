@@ -21,6 +21,15 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
+    }
+  }, []);
+
   // addNote function is used to add a new note to the server
   const addNote = (event) => {
     event.preventDefault(); // prevent the default action of the event, aka form submission reloading the page
@@ -71,6 +80,8 @@ const App = () => {
         username,
         password,
       });
+
+      window.localStorage.setItem("loggedNoteappUser", JSON.stringify(user));
 
       noteService.setToken(user.token);
       setUser(user);
