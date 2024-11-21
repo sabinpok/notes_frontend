@@ -71,6 +71,8 @@ const App = () => {
         username,
         password,
       });
+
+      noteService.setToken(user.token);
       setUser(user);
       setUsername("");
       setPassword("");
@@ -141,10 +143,6 @@ const App = () => {
           />
         ))}
       </ul>
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type="submit">save</button>
-      </form>
       <Footer />
     </div>
   );
